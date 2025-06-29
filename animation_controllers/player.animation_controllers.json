@@ -132,6 +132,9 @@
             },
             {
               "first_person_breathing_bob": "variable.attack_time <= 0.0"
+            },
+            {
+              "first_person_holding_snowball": "query.is_item_name_any('slot.weapon.mainhand', 'minecraft:snowball')"
             }
           ],
           "transitions": [

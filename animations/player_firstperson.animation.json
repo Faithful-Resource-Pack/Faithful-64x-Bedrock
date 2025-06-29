@@ -78,6 +78,15 @@
 				}
 			}
 		},
+		"animation.player.first_person.holding_snowball": {
+			"loop": true,
+			"bones": {
+				"rightitem": {
+					"position": [ 4.5, -0.35, -7.0 ],
+					"scale": 0.25
+				}
+			}
+		},
 		"animation.player.first_person.map_hold": {
 			"loop": true,
 			"bones": {
