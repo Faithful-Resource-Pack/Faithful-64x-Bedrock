@@ -164,6 +164,15 @@
         }
       }
     },
+    "animation.player.holding_arrow_third_person_off_hand": {
+      "loop": true,
+      "bones": {
+        "leftitem": {
+          "scale": 0.25,
+          "position": [ 4.5, -0.35, -7.0 ]
+        }
+      }
+    },
     "animation.player.holding.zombie": {
       "loop": true,
       "bones": {

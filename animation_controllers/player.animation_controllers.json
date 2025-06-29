@@ -266,6 +266,9 @@
             },
             {
               "holding_arrow": "query.is_item_name_any('slot.weapon.mainhand', 'minecraft:arrow')"
+            },
+            {
+              "holding_arrow_third_person_off_hand": "query.get_equipped_item_name('off_hand') == 'arrow'"
             }
           ],
           "transitions": [
