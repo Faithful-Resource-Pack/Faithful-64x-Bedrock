@@ -82,7 +82,7 @@
 			"loop": true,
 			"bones": {
 				"rightitem": {
-					"position": [ 4.5, -0.35, -7.0 ],
+					"position": [ 0.0, "q.get_default_bone_pivot('rightarm',1) - q.get_default_bone_pivot('rightitem',1) - 7.0", "-q.get_default_bone_pivot('rightitem',2)" ],
 					"scale": 0.25
 				}
 			}
