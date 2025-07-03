@@ -1,13 +1,13 @@
 {
   "format_version": 2,
   "header": {
-    "description": "By HARYA_ and many others. The go-to 64x texture pack for Minecraft.",
+    "description": "The go-to 64x texture pack for Minecraft. By HARYA_ and many others.",
     "min_engine_version": [
       1,
       21,
       90
     ],
-    "name": "Faithful 64x - March 2025 Release",
+    "name": "Faithful 64x - July 2025 Release",
     "uuid": "641006b1-0874-4f2c-b67f-d4071a479a5d",
     "version": [
       1,
@@ -22,7 +22,7 @@
 },
   "modules": [
     {
-      "description": "By HARYA_ and many others. The go-to 64x texture pack for Minecraft.",
+      "description": "The go-to 64x texture pack for Minecraft. By HARYA_ and many others.",
       "type": "resources",
       "uuid": "aea826fc-0fae-4340-a6cc-585794c47933",
       "version": [
