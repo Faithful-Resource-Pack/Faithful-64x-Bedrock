@@ -1,7 +1,7 @@
 {
   "format_version": 2,
   "header": {
-    "description": "The go-to 64x texture pack for Minecraft. Now for Bedrock Edition.",
+    "description": "By HARYA_ and many others. The go-to 64x texture pack for Minecraft.",
     "min_engine_version": [
       1,
       21,
@@ -22,7 +22,7 @@
 },
   "modules": [
     {
-      "description": "The go-to 64x texture pack for Minecraft. Now for Bedrock Edition.",
+      "description": "By HARYA_ and many others. The go-to 64x texture pack for Minecraft.",
       "type": "resources",
       "uuid": "aea826fc-0fae-4340-a6cc-585794c47933",
       "version": [
