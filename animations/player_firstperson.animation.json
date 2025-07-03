@@ -81,7 +81,11 @@
 		"animation.player.first_person.holding_snowball": {
 			"loop": true,
 			"bones": {
-				"rightitem": {
+				"rightarm": {
+					"position": [ 13.5, -10.0, 12.0 ],
+					"rotation": [ "95.0 + variable.is_using_vr * 7.5", "-45.0 + variable.is_using_vr * 7.5", "115.0 + variable.is_using_vr * -2.5" ]
+				},
+				"rightItem": {
 					"position": [ 0.0, "q.get_default_bone_pivot('rightarm',1) - q.get_default_bone_pivot('rightitem',1) - 7.0", "-q.get_default_bone_pivot('rightitem',2)" ],
 					"scale": 0.25
 				}
