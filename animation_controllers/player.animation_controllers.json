@@ -122,6 +122,9 @@
               "first_person_empty_hand": "query.get_equipped_item_name(0, 1) != 'filled_map'"
             },
             {
+              "ffirst_person_snowball": "query.is_item_name_any('slot.weapon.mainhand', 0, 'minecraft:snowball')"
+            },
+            {
               "first_person_walk": "variable.bob_animation"
             },
             {
