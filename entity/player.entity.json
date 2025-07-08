@@ -108,8 +108,7 @@
         "holding_snowball": "animation.player.holding_snowball",
         "holding_wolf_armor": "animation.player.holding_wolf_armor",
         "holding_arrow": "animation.player.holding_arrow",
-        "holding_arrow_third_person_off_hand": "animation.player.holding_arrow_third_person_off_hand",
-        "first_person_holding_snowball": "animation.player.first_person.holding_snowball"
+        "holding_arrow_third_person_off_hand": "animation.player.holding_arrow_third_person_off_hand"
       },
       "render_controllers": [
         {
