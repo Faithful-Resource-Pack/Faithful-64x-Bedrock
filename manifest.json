@@ -5,10 +5,10 @@
     "min_engine_version": [
       1,
       21,
-      90
+      80
     ],
     "name": "Faithful 64x - July 2025 Release",
-    "uuid": "641006b1-0874-4f2c-b67f-d4071a479a5d",
+    "uuid": "d41eca3c-63b1-4f18-aeb4-2d5fd7cba7fa",
     "version": [
       1,
       0,
@@ -24,7 +24,7 @@
     {
       "description": "The go-to 64x texture pack for Minecraft. By HARYA_ and many others.",
       "type": "resources",
-      "uuid": "aea826fc-0fae-4340-a6cc-585794c47933",
+      "uuid": "e4601d75-b7a7-4a32-b30e-63512dce84cf",
       "version": [
         0,
         0,
