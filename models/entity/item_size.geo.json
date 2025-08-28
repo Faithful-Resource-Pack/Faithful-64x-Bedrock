@@ -12,7 +12,7 @@
 			},
 			"bones": [
 				{
-					"name": "root_item",
+					"name": "rightitem",
 					"pivot": [0, 0, 0],
 					"rotation": [0, 87.5, 0],
 					"binding": "q.item_slot_to_bone_name(context.item_slot)",
