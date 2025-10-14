@@ -5,7 +5,9 @@
       "initial_state": "default",
       "states": {
         "charge": {
-          "animations": [ "third_person_crossbow_equipped" ],
+          "animations": [
+            "third_person_crossbow_equipped"
+          ],
           "transitions": [
             {
               "default": "query.get_equipped_item_name != 'crossbow' || (query.item_remaining_use_duration <= 0.0 && !query.item_is_charged)"
@@ -26,7 +28,9 @@
           ]
         },
         "hold": {
-          "animations": [ "crossbow_hold" ],
+          "animations": [
+            "crossbow_hold"
+          ],
           "transitions": [
             {
               "default": "query.get_equipped_item_name != 'crossbow' || (query.item_remaining_use_duration <= 0.0 && !query.item_is_charged)"
@@ -38,11 +42,54 @@
         }
       }
     },
+    "controller.animation.player.melee_spear": {
+      "initial_state": "hold",
+      "states": {
+        "hold": {
+          "animations": [
+            "third_person_melee_spear_hold"
+          ],
+          "transitions": [
+            {
+              "use": "variable.item_use_normalized > 0.0"
+            },
+            {
+              "attack": "variable.attack_time > 0.0"
+            }
+          ]
+        },
+        "use": {
+          "animations": [
+            "third_person_melee_spear_use"
+          ],
+          "transitions": [
+            {
+              "hold": "variable.item_use_normalized == 0.0"
+            }
+          ]
+        },
+        "attack": {
+          "animations": [
+            "third_person_melee_spear_attack"
+          ],
+          "transitions": [
+            {
+              "hold": "variable.attack_time == 0.0"
+            },
+            {
+              "use": "variable.item_use_normalized > 0.0"
+            }
+          ]
+        }
+      }
+    },
     "controller.animation.player.first_person_attack": {
       "initial_state": "default",
       "states": {
         "default": {
-          "animations": [ "first_person_attack_rotation" ],
+          "animations": [
+            "first_person_attack_rotation"
+          ],
           "transitions": [
             {
               "vr_attack": "variable.is_using_vr"
@@ -50,7 +97,9 @@
           ]
         },
         "vr_attack": {
-          "animations": [ "first_person_vr_attack_rotation" ],
+          "animations": [
+            "first_person_vr_attack_rotation"
+          ],
           "transitions": [
             {
               "default": "!variable.is_using_vr"
@@ -91,7 +140,10 @@
           ]
         },
         "two_hand": {
-          "animations": [ "first_person_map_hold", "first_person_map_hold_attack" ],
+          "animations": [
+            "first_person_map_hold",
+            "first_person_map_hold_attack"
+          ],
           "transitions": [
             {
               "default": "query.get_equipped_item_name(0, 1) != 'filled_map' && query.get_equipped_item_name('off_hand') != 'filled_map'"
@@ -103,11 +155,56 @@
         }
       }
     },
+    "controller.animation.player.first_person_melee_spear": {
+      "initial_state": "hold",
+      "states": {
+        "hold": {
+          "animations": [
+            "first_person_melee_spear_hold"
+          ],
+          "transitions": [
+            {
+              "use": "variable.item_use_normalized > 0.0"
+            },
+            {
+              "attack": "variable.attack_time > 0.0"
+            }
+          ]
+        },
+        "use": {
+          "animations": [
+            "first_person_melee_spear_use"
+          ],
+          "transitions": [
+            {
+              "hold": "variable.item_use_normalized == 0.0"
+            }
+          ]
+        },
+        "attack": {
+          "animations": [
+            "first_person_melee_spear_attack"
+          ],
+          "transitions": [
+            {
+              "hold": "variable.attack_time == 0.0"
+            },
+            {
+              "use": "variable.item_use_normalized > 0.0"
+            }
+          ],
+          "blend_transition": 0.2,
+          "blend_via_shortest_path": true
+        }
+      }
+    },
     "controller.animation.player.root": {
       "initial_state": "first_person",
       "states": {
         "first_person": {
           "animations": [
+            "first_person_base_pose",
+            "first_person_breathing_bob",
             {
               "first_person_swap_item": "!query.blocking"
             },
@@ -115,26 +212,22 @@
               "first_person_shield_block": "query.blocking"
             },
             {
-              "first_person_attack_controller": "variable.attack_time > 0.0f && query.get_equipped_item_name != 'filled_map'"
+              "first_person_attack_controller": "variable.attack_time > 0.0 && query.get_equipped_item_name != 'filled_map' && !variable.melee_spear_equipped"
             },
-            "first_person_base_pose",
             {
               "first_person_empty_hand": "query.get_equipped_item_name(0, 1) != 'filled_map'"
-            },
-            {
-              "ffirst_person_snowball": "query.is_item_name_any('slot.weapon.mainhand', 0, 'minecraft:snowball')"
             },
             {
               "first_person_walk": "variable.bob_animation"
             },
             {
-              "first_person_map_controller": "(query.get_equipped_item_name(0, 1) == 'filled_map' || query.get_equipped_item_name('off_hand') == 'filled_map')"
+              "first_person_map_controller": "query.get_equipped_item_name(0, 1) == 'filled_map' || query.get_equipped_item_name('off_hand') == 'filled_map'"
             },
             {
-              "first_person_crossbow_equipped": "query.get_equipped_item_name == 'crossbow' && (variable.item_use_normalized > 0 && variable.item_use_normalized < 1.0)"
+              "first_person_crossbow_equipped": "query.get_equipped_item_name == 'crossbow' && variable.item_use_normalized > 0.0 && variable.item_use_normalized < 1.0"
             },
             {
-              "first_person_breathing_bob": "variable.attack_time <= 0.0"
+              "first_person_melee_spear_controller": "variable.melee_spear_equipped"
             }
           ],
           "transitions": [
@@ -163,7 +256,13 @@
           ]
         },
         "paperdoll": {
-          "animations": [ "humanoid_base_pose", "look_at_target_ui", "move.arms", "move.legs", "cape" ],
+          "animations": [
+            "humanoid_base_pose",
+            "look_at_target_ui",
+            "move.arms",
+            "move.legs",
+            "cape"
+          ],
           "transitions": [
             {
               "first_person": "!variable.is_paperdoll && variable.is_first_person"
@@ -217,10 +316,16 @@
               "swimming": "variable.swim_amount > 0.0"
             },
             {
+              "swimming.right_arm": "variable.swim_amount > 0.0 && !variable.melee_spear_equipped"
+            },
+            {
               "swimming.legs": "variable.swim_amount > 0.0"
             },
             {
               "crawling": "query.is_crawling"
+            },
+            {
+              "crawling.right_arm": "query.is_crawling && !variable.melee_spear_equipped"
             },
             {
               "crawling.legs": "query.is_crawling"
@@ -232,10 +337,10 @@
               "sleeping": "query.is_sleeping && query.is_alive"
             },
             {
-              "attack.positions": "variable.attack_time >= 0.0"
+              "attack.positions": "variable.attack_time >= 0.0 && !variable.melee_spear_equipped"
             },
             {
-              "attack.rotations": "variable.attack_time >= 0.0"
+              "attack.rotations": "variable.attack_time >= 0.0 && !variable.melee_spear_equipped"
             },
             {
               "shield_block_main_hand": "query.blocking && query.get_equipped_item_name('off_hand') != 'shield' && query.get_equipped_item_name == 'shield'"
@@ -260,6 +365,9 @@
             },
             {
               "holding_heavy_core": "query.is_item_name_any('slot.weapon.mainhand', 'minecraft:heavy_core')"
+            },
+            {
+              "third_person_melee_spear_controller": "variable.melee_spear_equipped"
             },
             {
               "holding_snowball": "query.is_item_name_any('slot.weapon.mainhand', 'minecraft:snowball')"
