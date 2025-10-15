@@ -1,9 +1,9 @@
 {
-  "format_version": "1.10.0",
+  "format_version": "1.21.0",
   "minecraft:attachable": {
     "description": {
       "identifier": "minecraft:snowball",
-      "item": { "minecraft:snowball": "query.owner_identifier == 'minecraft:player'" },
+      "min_engine_version": "1.21.0",
       "materials": {
         "default": "entity_alphatest",
         "enchanted": "entity_alphatest_glint"
@@ -14,36 +14,34 @@
         "item": "textures/items/snowball"
       },
       "geometry": {
-        "default": "geometry.item_size"
+        "default": "geometry.snowball_item_size"
       },
       "animations": {
-        "first_person_hold": "animation.player_item.first_person_hold",
-        "third_person_hold": "animation.player_item.third_person_hold",
-        "flying": "animation.actor.billboard"
+        "first_person_hold": "animation.snowball_player_item.first_person_hold",
+        "third_person_hold": "animation.snowball_player_item.third_person_hold",
+        "flying": "animation.snowball_entity"
       },
       "scripts": {
-        "scripts": {
-          "animate": [
-            {
-              "flying": "!q.is_attached"
-            },
-            {
-              "first_person_hold": "q.is_attached"
-            },
-            {
-              "third_person_hold": "q.is_attached"
-            }
-          ]
-        },
-        "render_controllers": [
+        "animate": [
           {
-            "controller.render.item_sprite": "!q.is_attached"
+            "flying": "!q.is_attached"
           },
           {
-            "controller.render.item": "q.is_attached"
+            "first_person_hold": "!c.is_first_person"
+          },
+          {
+            "third_person_hold": "c.is_first_person"
           }
         ]
-      }
+      },
+      "render_controllers": [
+        {
+          "controller.render.item_sprite": "!q.is_attached"
+        },
+        {
+          "controller.render.item_size.animate": "q.is_attached"
+        }
+      ]
     }
   }
 }
