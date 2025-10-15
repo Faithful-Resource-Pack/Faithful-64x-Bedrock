@@ -2,7 +2,6 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "min_engine_version": "1.8.0",
       "identifier": "minecraft:player",
       "materials": {
         "default": "entity_alphatest",
@@ -116,6 +115,10 @@
         "crawling.right_arm": "animation.player.crawl.right_arm",
         "riding.root": "animation.player.riding.root",
         "holding_heavy_core": "animation.player.holding_heavy_core",
+        "holding_snowball": "animation.player.holding_snowball",
+        "holding_wolf_armor": "animation.player.holding_wolf_armor",
+        "holding_arrow": "animation.player.holding_arrow",
+        "holding_arrow_third_person_off_hand": "animation.player.holding_arrow_third_person_off_hand",
         "first_person_melee_spear_use": "animation.player.first_person.melee_spear_use",
         "first_person_melee_spear_hold": "animation.player.first_person.melee_spear_hold",
         "first_person_melee_spear_attack": "animation.player.first_person.melee_spear_attack",
@@ -123,11 +126,7 @@
         "third_person_melee_spear_use": "animation.humanoid.melee_spear_use",
         "third_person_melee_spear_hold": "animation.humanoid.melee_spear_hold",
         "third_person_melee_spear_attack": "animation.player.melee_spear_attack",
-        "third_person_melee_spear_controller": "controller.animation.player.melee_spear",
-        "holding_snowball": "animation.player.holding_snowball",
-        "holding_wolf_armor": "animation.player.holding_wolf_armor",
-        "holding_arrow": "animation.player.holding_arrow",
-        "holding_arrow_third_person_off_hand": "animation.player.holding_arrow_third_person_off_hand"
+        "third_person_melee_spear_controller": "controller.animation.player.melee_spear"
       },
       "render_controllers": [
         {
