@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.snowball_player_item.third_person_hold": {
+		"animation.snowball_player_item.first_person_hold": {
 			"loop": true,
 			"animation_length": 10,
 			"bones": {
@@ -15,7 +15,7 @@
 				}
 			}
 		},
-		"animation.snowball_player_item.first_person_hold": {
+		"animation.snowball_player_item.third_person_hold": {
 			"loop": true,
 			"animation_length": 10,
 			"bones": {

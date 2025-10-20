@@ -27,10 +27,10 @@
             "flying": "!q.is_attached"
           },
           {
-            "first_person_hold": "!c.is_first_person"
+            "first_person_hold": "c.is_first_person"
           },
           {
-            "third_person_hold": "c.is_first_person"
+            "third_person_hold": "!c.is_first_person"
           }
         ]
       },
