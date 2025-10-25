@@ -1,400 +1,548 @@
 {
-  "format_version": "1.10.0",
-  "animation_controllers": {
-    "controller.animation.player.crossbow": {
-      "initial_state": "default",
-      "states": {
-        "charge": {
-          "animations": [
-            "third_person_crossbow_equipped"
-          ],
-          "transitions": [
-            {
-              "default": "query.get_equipped_item_name != 'crossbow' || (query.item_remaining_use_duration <= 0.0 && !query.item_is_charged)"
-            },
-            {
-              "hold": "query.item_is_charged"
+    "format_version": "1.8.0",
+    "animations": {
+        "animation.player.attack.positions": {
+            "loop": true,
+            "bones": {
+                "head": {
+                    "rotation": [ 0.0, 0.0, 0.0 ]
+                }
             }
-          ]
         },
-        "default": {
-          "transitions": [
-            {
-              "hold": "query.item_is_charged"
-            },
-            {
-              "charge": "query.item_remaining_use_duration > 0.0"
+        "animation.player.attack.rotations": {
+            "loop": true,
+            "bones": {
+                "body": {
+                    "rotation": [ 0.0, "variable.attack_body_rot_y", 0.0 ]
+                },
+                "leftarm": {
+                    "rotation": [ "-(math.sin((1 - math.pow((1 - variable.attack_time), 4)) * 180) * 1.2 + math.sin(variable.attack_time * 180)) * 10.0", 0.0, 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ "-(math.sin((1 - math.pow((1 - variable.attack_time), 4)) * 180) * 1.2 + math.sin(variable.attack_time * 180)) * 30.0", "-(math.sin((1 - math.pow((1 - variable.attack_time), 4)) * 180) ? (-90.0 * math.sin((1 - math.pow((1 - variable.attack_time), 4)) * 180)) + 30.0 : 0.0)", 0.0 ]
+                }
             }
-          ]
         },
-        "hold": {
-          "animations": [
-            "crossbow_hold"
-          ],
-          "transitions": [
-            {
-              "default": "query.get_equipped_item_name != 'crossbow' || (query.item_remaining_use_duration <= 0.0 && !query.item_is_charged)"
-            },
-            {
-              "charge": "query.item_remaining_use_duration > 0.0"
+        "animation.player.base_pose.upside_down": {
+            "loop": true,
+            "bones": {
+                "waist": {
+                    "position": [ 0.0, 8.0, 0.0 ],
+                    "rotation": [ 0.0, 0.0, 180.0 ]
+                }
             }
-          ]
+        },
+        "animation.player.bob": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ 0.0, 0.0, "-((math.cos(query.life_time * 103.2) * 2.865) + 2.865)" ]
+                },
+                "rightarm": {
+                    "rotation": [ 0.0, 0.0, "(math.cos(query.life_time * 103.2) * 2.865) + 2.865" ]
+                }
+            }
+        },
+        "animation.player.bob.stationary": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ 0.0, 0.0, "-((math.cos(query.life_time * 103.2) * 2.865) + 2.865)" ]
+                },
+                "rightarm": {
+                    "rotation": [ 0.0, 0.0, "(math.cos(query.life_time * 103.2) * 2.865) + 2.865" ]
+                }
+            }
+        },
+        "animation.player.bow_equipped": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ "-90.0 + query.target_x_rotation - query.is_sneaking * 15.0 - this", "27.5 + query.target_y_rotation", 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ "-90.0 + query.target_x_rotation - query.is_sneaking * 15.0 - this", "-5.0 + query.target_y_rotation", 0.0 ]
+                },
+                "rightitem": {
+                    "rotation": [ 0.0, -10.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.cape": {
+            "loop": true,
+            "bones": {
+                "cape": {
+                    "position": [ 0.0, "query.get_root_locator_offset('armor_offset.default_neck', 1)", 0.0 ],
+                    "rotation": [ "math.lerp(0.0, -126.0, query.cape_flap_amount) - 6.0", 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.crossbow_equipped": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "position": [ 0.0, 0.0, 0.5 ],
+                    "rotation": [ "-this - 65.0 - (1.0 - variable.item_use_normalized) * 5.0", "-this + (1.0 - variable.item_use_normalized) * 30.0", "-this + 20.0 + (1.0 - variable.item_use_normalized) * 10.0" ]
+                },
+                "rightarm": {
+                    "rotation": [ "- 60.0 - this", "- 45.0 - this", "- 2.5 - this" ]
+                }
+            }
+        },
+        "animation.player.crossbow_hold": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ "query.is_swimming ? 0.0 : -93.0 + query.target_x_rotation - query.is_sneaking * 27.0 -this", "query.is_swimming ? 0.0 : 42.0 + math.clamp(query.target_y_rotation, -45.0, 5.0) -this", "query.is_sneaking * -15.0" ]
+                },
+                "rightarm": {
+                    "rotation": [ "query.is_swimming ? 0.0 : -93.0 + query.target_x_rotation - query.is_sneaking * 27.0 -this", "query.is_swimming ? 0.0 : math.clamp(query.target_y_rotation, -60.0, 45.0) -this", 0.0 ]
+                }
+            }
+        },
+        "animation.player.melee_spear_attack": {
+            "loop": true,
+            "bones": {
+                "body": {
+                    "rotation": [ 0.0, "v.attack_body_rot_y", 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [
+                        "v.tp_melee_spear_base_arm_rotation_x + q.target_x_rotation - q.is_sneaking * 27.0 - this + v.tp_melee_spear_attack_arm_rotation_x",
+                        "math.clamp(q.target_y_rotation, -60.0, 45.0) - this - v.attack_body_rot_y",
+                        0.0
+                    ]
+                },
+                "rightitem": {
+                    "position": [ 0.0, -1.5, -1.5 ],
+                    "rotation": [ "v.tp_melee_spear_attack_item_rotation_x", 0.0, 0.0 ]
+                }
+            }
+        },
+        // Apparently not used by any Vanilla content.
+        "animation.player.glide": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ "variable.tcos0", 0.0, 0.0 ]
+                },
+                "leftleg": {
+                    "rotation": [ "variable.tcos0 * -1.4", -0.1, -0.1 ]
+                },
+                "rightarm": {
+                    "rotation": [ "-variable.tcos0", 0.0, 0.0 ]
+                },
+                "rightleg": {
+                    "rotation": [ "variable.tcos0 * 1.4", 0.1, 0.1 ]
+                }
+            }
+        },
+        "animation.player.holding": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ "variable.is_holding_left ? (-this * 0.5 - 18.0) : 0.0", 0.0, 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ "variable.is_holding_right ? (-this * 0.5 - 18.0) : 0.0", 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.holding_heavy_core": {
+            "loop": true,
+            "bones": {
+                "rightItem": {
+                    "scale": 0.7,
+                    "position": [ -1.0, 0.0, -2.0 ]
+                }
+            }
+        },
+        "animation.player.holding_wolf_armor": {
+            "loop": true,
+            "bones": {
+                "rightItem": {
+                    "scale": 0.25,
+                    "position": [ 4.5, -0.35, -7.0 ]
+                }
+            }
+        },
+        "animation.player.holding.zombie": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ 0.0, 0.0, 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ 0.0, 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.look_at_target.inverted": {
+            "loop": true,
+            "bones": {
+                "head": {
+                    "rotation": [ "-query.target_x_rotation", "-query.target_y_rotation", 0.0 ]
+                }
+            }
+        },
+        "animation.player.look_at_target.ui": {
+            "loop": true,
+            "bones": {
+                "head": {
+                    "rotation": [ "query.target_x_rotation", "query.target_y_rotation", 0.0 ]
+                }
+            }
+        },
+        "animation.player.move.arms": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ "variable.tcos0", 0.0, 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ "-variable.tcos0", 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.move.arms.single": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ "-variable.tcos0", 0.0, 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ "-variable.tcos0", 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.move.arms.stationary": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ 0.0, 0.0, 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ 0.0, 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.move.arms.statue_of_liberty": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ "variable.tcos0", 0.0, 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ "variable.is_holding_right || math.sin((1 - math.pow((1 - variable.attack_time), 4)) * 180) > 0.0  ? -variable.tcos0 : 180.0", 0.0, "variable.is_holding_right || math.sin((1 - math.pow((1 - variable.attack_time), 4)) * 180) > 0.0 ? 0.0 : -17.2" ]
+                }
+            }
+        },
+        "animation.player.move.arms.zombie": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ -90.0, 0.0, 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ -90.0, 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.move.legs": {
+            "loop": true,
+            "bones": {
+                "leftleg": {
+                    "rotation": [ "variable.tcos0 * -1.4", -0.1, -0.1 ]
+                },
+                "rightleg": {
+                    "rotation": [ "variable.tcos0 * 1.4", 0.1, 0.1 ]
+                }
+            }
+        },
+        "animation.player.move.legs.inverted": {
+            "loop": true,
+            "bones": {
+                "leftleg": {
+                    "position": [ 0.0, 8.0, 0.0 ],
+                    "rotation": [ "variable.tcos0", -0.1, 179.9 ]
+                },
+                "rightleg": {
+                    "position": [ 0.0, 8.0, 0.0 ],
+                    "rotation": [ "-variable.tcos0", 0.1, 180.1 ]
+                }
+            }
+        },
+        "animation.player.move.legs.single": {
+            "loop": true,
+            "bones": {
+                "leftleg": {
+                    "rotation": [ "variable.tcos0", -0.1, -0.1 ]
+                },
+                "rightleg": {
+                    "rotation": [ "variable.tcos0", 0.1, 0.1 ]
+                }
+            }
+        },
+        "animation.player.move.legs.stationary": {
+            "loop": true,
+            "bones": {
+                "leftleg": {
+                    "rotation": [ 0.0, -0.1, -0.1 ]
+                },
+                "rightleg": {
+                    "rotation": [ 0.0, 0.1, 0.1 ]
+                }
+            }
+        },
+        "animation.player.riding.root": {
+            "loop": true,
+            "bones": {
+                "root": {
+                    "position": [ 0.0, "variable.riding_y_offset ?? 0.0", 0.0 ]
+                }
+            }
+        },
+        "animation.player.riding.arms": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ -36.0, 0.0, 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ -36.0, 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.riding.arms.zombie": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ 45.0, 0.0, 0.0 ]
+                },
+                "rightarm": {
+                    "rotation": [ 45.0, 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.riding.legs": {
+            "loop": true,
+            "bones": {
+                "leftleg": {
+                    "rotation": [ "-81.0 - this", "-18.0 - this", "-this" ]
+                },
+                "rightleg": {
+                    "rotation": [ "-81.0 - this", "18.0 - this", "-this" ]
+                }
+            }
+        },
+        "animation.player.shield_block_main_hand": {
+            "loop": true,
+            "bones": {
+                "rightarm": {
+                    "rotation": [ -20.0, -30.0, -25.0 ]
+                },
+                "rightitem": {
+                    "position": [ -1.0, -3.0, 0.0 ],
+                    "rotation": [ 0.0, -60.0, -45.0 ]
+                }
+            }
+        },
+        "animation.player.shield_block_off_hand": {
+            "loop": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": [ -20.0, 20.0, 20.0 ]
+                },
+                "leftitem": {
+                    "position": [ "1.0 + query.item_is_charged * 1.5", "-3.0 + query.item_is_charged", 0.0 ],
+                    "rotation": [ "query.item_is_charged * 30.0", "70.0 - query.item_is_charged * 60.0", "65.0 - query.item_is_charged * 15.0" ]
+                }
+            }
+        },
+        "animation.player.sleeping": {
+            "loop": true,
+            "override_previous_animation": true,
+            "bones": {
+                "head": {
+                    "rotation": [ "30.0 - this", "-this", "-this" ]
+                },
+                "root": {
+                    "position": [ "24.0 * math.cos(query.body_y_rotation) * math.cos(query.sleep_rotation) - 24.0 * math.sin(query.body_y_rotation) * math.sin(query.sleep_rotation)", 0.0, "24.0 * math.cos(query.body_y_rotation) * math.sin(query.sleep_rotation) + 24.0 * math.sin(query.body_y_rotation) * math.cos(query.sleep_rotation)" ],
+                    "rotation": [ -90.0, "270.0 - query.sleep_rotation - query.body_y_rotation", 0.0 ]
+                }
+            }
+        },
+        "animation.player.sneaking": {
+            "loop": true,
+            "bones": {
+                "body": {
+                    "position": [ 0.0, -2.0, 0.0 ]
+                },
+                "head": {
+                    "position": [ 0.0, -1.0, 0.0 ]
+                },
+                "leftarm": {
+                    "rotation": [ -5.7, 0.0, 0.0 ]
+                },
+                "leftleg": {
+                    "rotation": [ -28.0, -0.1, -0.1 ]
+                },
+                "rightarm": {
+                    "rotation": [ -5.7, 0.0, 0.0 ]
+                },
+                "rightleg": {
+                    "rotation": [ -28.0, 0.1, 0.1 ]
+                },
+                "root": {
+                    "position": [ 0.0, 1.25, 9.0 ],
+                    "rotation": [ "28.0 - this", 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.sneaking.inverted": {
+            "loop": true,
+            "bones": {
+                "body": {
+                    "position": [ 0.0, -2.0, 0.0 ]
+                },
+                "head": {
+                    "position": [ 0.0, -1.0, 0.0 ],
+                    "rotation": [ -28.0, 0.0, 0.0 ]
+                },
+                "leftarm": {
+                    "rotation": [ -5.7, 0.0, 0.0 ]
+                },
+                "leftleg": {
+                    "rotation": [ 28.0, -0.1, -0.1 ]
+                },
+                "rightarm": {
+                    "rotation": [ -5.7, 0.0, 0.0 ]
+                },
+                "rightleg": {
+                    "rotation": [ 28.0, 0.1, 0.1 ]
+                },
+                "root": {
+                    "position": [ 0.0, 1.25, -8.0 ],
+                    "rotation": [ "-28.0 - this", 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.swim": {
+            "animation_length": 1.3,
+            "loop": true,
+            "override_previous_animation": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": {
+                        "0": [ 0.0, 180.0, 180.0 ],
+                        "0.7": [ 0.0, 180.0, 287.2 ],
+                        "1.1": [ 90.0, 180.0, 180.0 ],
+                        "1.3": [ 0.0, 180.0, 180.0 ]
+                    }
+                },
+                "root": {
+                    "position": [ 0.0, "(math.sin(query.target_x_rotation) * 17.0 + 5.0) * variable.swim_amount", "(math.cos(query.target_x_rotation) * 17.0) * variable.swim_amount" ],
+                    "rotation": [ "variable.swim_amount * (90 + query.target_x_rotation)", 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.swim.right_arm": {
+            "animation_length": 1.3,
+            "loop": true,
+            "override_previous_animation": true,
+            "bones": {
+                "rightarm": {
+                    "rotation": {
+                        "0": [ 0.0, 0.0, -0.0 ],
+                        "0.7": [ 0.0, 180.0, -287.2 ],
+                        "1.1": [ 90.0, 180.0, -180.0 ],
+                        "1.3": [ 0.0, 180.0, -180.0 ]
+                    }
+                }
+            }
+        },
+        "animation.player.swim.legs": {
+            "loop": true,
+            "override_previous_animation": true,
+            "bones": {
+                "leftleg": {
+                    "rotation": [ "math.lerp(0.0, math.cos(query.life_time * 390.0 + 180.0) * 17.2, variable.swim_amount)", -0.1, -0.1 ]
+                },
+                "rightleg": {
+                    "rotation": [ "math.lerp(0.0, math.cos(query.life_time * 390.0) * 17.2, variable.swim_amount)", 0.1, 0.1 ]
+                }
+            }
+        },
+        "animation.player.swim.legs.single": {
+            "loop": true,
+            "override_previous_animation": true,
+            "bones": {
+                "leftleg": {
+                    "rotation": [ "math.lerp(0.0, math.cos(query.life_time * 390.0) * 17.2, variable.swim_amount)", -0.1, -0.1 ]
+                },
+                "rightleg": {
+                    "rotation": [ "math.lerp(0.0, math.cos(query.life_time * 390.0) * 17.2, variable.swim_amount)", 0.1, 0.1 ]
+                }
+            }
+        },
+        "animation.player.swim.legs.stationary": {
+            "loop": true,
+            "bones": {
+                "leftleg": {
+                    "rotation": [ 0.0, -0.1, -0.1 ]
+                },
+                "rightleg": {
+                    "rotation": [ 0.0, 0.1, 0.1 ]
+                }
+            }
+        },
+        "animation.player.crawl": {
+            "anim_time_update": "query.modified_distance_moved / 15.0",
+            "animation_length": 1.3,
+            "loop": true,
+            "override_previous_animation": true,
+            "bones": {
+                "leftarm": {
+                    "rotation": {
+                        "0": [ 0.0, 180.0, 180.0 ],
+                        "0.7": [ 0.0, 180.0, 287.2 ],
+                        "1.1": [ 90.0, 180.0, 180.0 ],
+                        "1.3": [ 0.0, 180.0, 180.0 ]
+                    }
+                },
+                "root": {
+                    "position": [ 0.0, "5.0 * variable.swim_amount", "17.0 * variable.swim_amount" ],
+                    "rotation": [ "variable.swim_amount * 90", 0.0, 0.0 ]
+                }
+            }
+        },
+        "animation.player.crawl.right_arm": {
+            "anim_time_update": "query.modified_distance_moved / 15.0",
+            "animation_length": 1.3,
+            "loop": true,
+            "override_previous_animation": true,
+            "bones": {
+                "rightarm": {
+                    "rotation": {
+                        "0": [ 0.0, 180.0, -180.0 ],
+                        "0.7": [ 0.0, 180.0, -287.2 ],
+                        "1.1": [ 90.0, 180.0, -180.0 ],
+                        "1.3": [ 0.0, 180.0, -180.0 ]
+                    }
+                }
+            }
+        },
+        "animation.player.crawl.legs": {
+            "loop": true,
+            "override_previous_animation": true,
+            "bones": {
+                "leftleg": {
+                    "rotation": [ "math.lerp(0.0, math.cos(query.modified_distance_moved * 30.0 + 180.0) * 17.2, variable.swim_amount)", -0.1, -0.1 ]
+                },
+                "rightleg": {
+                    "rotation": [ "math.lerp(0.0, math.cos(query.modified_distance_moved * 30.0) * 17.2, variable.swim_amount)", 0.1, 0.1 ]
+                }
+            }
         }
-      }
-    },
-    "controller.animation.player.melee_spear": {
-      "initial_state": "hold",
-      "states": {
-        "hold": {
-          "animations": [
-            "third_person_melee_spear_hold"
-          ],
-          "transitions": [
-            {
-              "use": "variable.item_use_normalized > 0.0"
-            },
-            {
-              "attack": "variable.attack_time > 0.0"
-            }
-          ]
-        },
-        "use": {
-          "animations": [
-            "third_person_melee_spear_use"
-          ],
-          "transitions": [
-            {
-              "hold": "variable.item_use_normalized == 0.0"
-            }
-          ]
-        },
-        "attack": {
-          "animations": [
-            "third_person_melee_spear_attack"
-          ],
-          "transitions": [
-            {
-              "hold": "variable.attack_time == 0.0"
-            },
-            {
-              "use": "variable.item_use_normalized > 0.0"
-            }
-          ]
-        }
-      }
-    },
-    "controller.animation.player.first_person_attack": {
-      "initial_state": "default",
-      "states": {
-        "default": {
-          "animations": [
-            "first_person_attack_rotation"
-          ],
-          "transitions": [
-            {
-              "vr_attack": "variable.is_using_vr"
-            }
-          ]
-        },
-        "vr_attack": {
-          "animations": [
-            "first_person_vr_attack_rotation"
-          ],
-          "transitions": [
-            {
-              "default": "!variable.is_using_vr"
-            }
-          ]
-        }
-      }
-    },
-    "controller.animation.player.first_person_map": {
-      "initial_state": "default",
-      "states": {
-        "default": {
-          "transitions": [
-            {
-              "one_hand": "query.get_equipped_item_name('off_hand') == 'filled_map' || query.get_equipped_item_name('off_hand') == 'shield'"
-            },
-            {
-              "two_hand": "query.get_equipped_item_name('off_hand') != 'filled_map' && query.get_equipped_item_name('off_hand') != 'shield'"
-            }
-          ]
-        },
-        "one_hand": {
-          "animations": [
-            {
-              "first_person_map_hold_main_hand": "query.get_equipped_item_name(0, 1) == 'filled_map'"
-            },
-            {
-              "first_person_map_hold_off_hand": "query.get_equipped_item_name('off_hand') == 'filled_map' && (query.get_equipped_item_name == 'bow' ? !(variable.item_use_normalized > 0 && variable.item_use_normalized < 1.0) : 1.0)"
-            }
-          ],
-          "transitions": [
-            {
-              "default": "query.get_equipped_item_name(0, 1) != 'filled_map' && query.get_equipped_item_name('off_hand') != 'filled_map'"
-            },
-            {
-              "two_hand": "query.get_equipped_item_name('off_hand') != 'filled_map' && query.get_equipped_item_name('off_hand') != 'shield'"
-            }
-          ]
-        },
-        "two_hand": {
-          "animations": [
-            "first_person_map_hold",
-            "first_person_map_hold_attack"
-          ],
-          "transitions": [
-            {
-              "default": "query.get_equipped_item_name(0, 1) != 'filled_map' && query.get_equipped_item_name('off_hand') != 'filled_map'"
-            },
-            {
-              "one_hand": "query.get_equipped_item_name('off_hand') == 'filled_map' || query.get_equipped_item_name('off_hand') == 'shield'"
-            }
-          ]
-        }
-      }
-    },
-    "controller.animation.player.first_person_melee_spear": {
-      "initial_state": "hold",
-      "states": {
-        "hold": {
-          "animations": [
-            "first_person_melee_spear_hold"
-          ],
-          "transitions": [
-            {
-              "use": "variable.item_use_normalized > 0.0"
-            },
-            {
-              "attack": "variable.attack_time > 0.0"
-            }
-          ]
-        },
-        "use": {
-          "animations": [
-            "first_person_melee_spear_use"
-          ],
-          "transitions": [
-            {
-              "hold": "variable.item_use_normalized == 0.0"
-            }
-          ]
-        },
-        "attack": {
-          "animations": [
-            "first_person_melee_spear_attack"
-          ],
-          "transitions": [
-            {
-              "hold": "variable.attack_time == 0.0"
-            },
-            {
-              "use": "variable.item_use_normalized > 0.0"
-            }
-          ],
-          "blend_transition": 0.2,
-          "blend_via_shortest_path": true
-        }
-      }
-    },
-    "controller.animation.player.root": {
-      "initial_state": "first_person",
-      "states": {
-        "first_person": {
-          "animations": [
-            "first_person_base_pose",
-            "first_person_breathing_bob",
-            {
-              "first_person_swap_item": "!query.blocking"
-            },
-            {
-              "first_person_shield_block": "query.blocking"
-            },
-            {
-              "first_person_attack_controller": "variable.attack_time > 0.0 && query.get_equipped_item_name != 'filled_map' && !variable.melee_spear_equipped"
-            },
-            {
-              "first_person_empty_hand": "query.get_equipped_item_name(0, 1) != 'filled_map'"
-            },
-            {
-              "first_person_walk": "variable.bob_animation"
-            },
-            {
-              "first_person_map_controller": "query.get_equipped_item_name(0, 1) == 'filled_map' || query.get_equipped_item_name('off_hand') == 'filled_map'"
-            },
-            {
-              "first_person_crossbow_equipped": "query.get_equipped_item_name == 'crossbow' && variable.item_use_normalized > 0.0 && variable.item_use_normalized < 1.0"
-            },
-            {
-              "first_person_melee_spear_controller": "variable.melee_spear_equipped"
-            }
-          ],
-          "transitions": [
-            {
-              "paperdoll": "variable.is_paperdoll"
-            },
-            {
-              "map_player": "variable.map_face_icon"
-            },
-            {
-              "third_person": "!variable.is_first_person"
-            }
-          ]
-        },
-        "map_player": {
-          "transitions": [
-            {
-              "paperdoll": "variable.is_paperdoll"
-            },
-            {
-              "first_person": "variable.is_first_person"
-            },
-            {
-              "third_person": "!variable.map_face_icon && !variable.is_first_person"
-            }
-          ]
-        },
-        "paperdoll": {
-          "animations": [
-            "humanoid_base_pose",
-            "look_at_target_ui",
-            "move.arms",
-            "move.legs",
-            "cape"
-          ],
-          "transitions": [
-            {
-              "first_person": "!variable.is_paperdoll && variable.is_first_person"
-            },
-            {
-              "map_player": "variable.map_face_icon"
-            },
-            {
-              "third_person": "!variable.is_paperdoll && !variable.is_first_person"
-            }
-          ]
-        },
-        "third_person": {
-          "animations": [
-            "humanoid_base_pose",
-            {
-              "look_at_target": "!query.is_sleeping && !query.is_emoting"
-            },
-            "move.arms",
-            "move.legs",
-            "cape",
-            {
-              "riding.root": "query.is_riding"
-            },
-            {
-              "riding.arms": "query.is_riding"
-            },
-            {
-              "riding.legs": "query.is_riding"
-            },
-            "holding",
-            {
-              "brandish_spear": "variable.is_brandishing_spear"
-            },
-            {
-              "holding_spyglass": "variable.is_holding_spyglass"
-            },
-            {
-              "charging": "query.is_charging"
-            },
-            {
-              "sneaking": "query.is_sneaking && !query.is_sleeping"
-            },
-            {
-              "bob": "!variable.is_holding_spyglass && !variable.is_tooting_goat_horn && !variable.is_using_brush"
-            },
-            {
-              "damage_nearby_mobs": "variable.damage_nearby_mobs"
-            },
-            {
-              "swimming": "variable.swim_amount > 0.0"
-            },
-            {
-              "swimming.right_arm": "variable.swim_amount > 0.0 && !variable.melee_spear_equipped"
-            },
-            {
-              "swimming.legs": "variable.swim_amount > 0.0"
-            },
-            {
-              "crawling": "query.is_crawling"
-            },
-            {
-              "crawling.right_arm": "query.is_crawling && !variable.melee_spear_equipped"
-            },
-            {
-              "crawling.legs": "query.is_crawling"
-            },
-            {
-              "use_item_progress": "( variable.use_item_interval_progress > 0.0 ) || ( variable.use_item_startup_progress > 0.0 ) && !variable.is_brandishing_spear && !variable.is_holding_spyglass && !variable.is_tooting_goat_horn && !variable.is_using_brush && !query.is_item_name_any('slot.weapon.mainhand', 'minecraft:bow')"
-            },
-            {
-              "sleeping": "query.is_sleeping && query.is_alive"
-            },
-            {
-              "attack.positions": "variable.attack_time >= 0.0 && !variable.melee_spear_equipped"
-            },
-            {
-              "attack.rotations": "variable.attack_time >= 0.0 && !variable.melee_spear_equipped"
-            },
-            {
-              "shield_block_main_hand": "query.blocking && query.get_equipped_item_name('off_hand') != 'shield' && query.get_equipped_item_name == 'shield'"
-            },
-            {
-              "shield_block_off_hand": "query.blocking && query.get_equipped_item_name('off_hand') == 'shield'"
-            },
-            {
-              "crossbow_controller": "query.get_equipped_item_name == 'crossbow'"
-            },
-            {
-              "third_person_bow_equipped": "query.get_equipped_item_name == 'bow' && (variable.item_use_normalized > 0 && variable.item_use_normalized < 1.0)"
-            },
-            {
-              "tooting_goat_horn": "variable.is_tooting_goat_horn"
-            },
-            {
-              "holding_brush": "query.get_equipped_item_name == 'brush'"
-            },
-            {
-              "brushing": "variable.is_using_brush"
-            },
-            {
-              "holding_heavy_core": "query.is_item_name_any('slot.weapon.mainhand', 'minecraft:heavy_core')"
-            },
-            {
-              "third_person_melee_spear_controller": "variable.melee_spear_equipped"
-            },
-            {
-              "holding_snowball": "query.is_item_name_any('slot.weapon.mainhand', 'minecraft:snowball')"
-            },
-            {
-              "holding_wolf_armor": "query.is_item_name_any('slot.weapon.mainhand', 'minecraft:wolf_armor')"
-            },
-            {
-              "holding_arrow": "query.is_item_name_any('slot.weapon.mainhand', 'minecraft:arrow')"
-            },
-            {
-              "holding_arrow_third_person_off_hand": "query.get_equipped_item_name('off_hand') == 'arrow'"
-            }
-          ],
-          "transitions": [
-            {
-              "paperdoll": "variable.is_paperdoll"
-            },
-            {
-              "first_person": "variable.is_first_person"
-            },
-            {
-              "map_player": "variable.map_face_icon"
-            }
-          ]
-        }
-      }
     }
-  }
 }
