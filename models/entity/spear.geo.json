@@ -1,0 +1,30 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.spear",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 1,
+				"visible_bounds_height": 1,
+				"visible_bounds_offset": [0, 0, 0]
+			},
+			"bones": [
+				{
+					"name": "rightitem",
+					"pivot": [0, 0, 0],
+					"texture_meshes": [
+						{
+							"texture": "default",
+							"position": [0, 0, 0],
+							"rotation": [0, -45, 90],
+							"local_pivot": [19, 0.5, 19],
+							"scale": [1, 0.5, 1]
+						}
+					]
+				}
+			]
+		}
+	]
+}
