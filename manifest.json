@@ -5,7 +5,7 @@
     "min_engine_version": [
       1,
       21,
-      100
+      120
     ],
     "name": "Faithful 64x - September 2025 Release",
     "uuid": "c8b6bb8b-16b3-42b9-b155-68c4ecd69ee7",
@@ -19,7 +19,7 @@
       "authors": [ "Vattic & Faithful Team" ],
       "license": "https://faithfulpack.net/license",
       "url": "https://faithfulpack.net/"
-},
+  },
   "modules": [
     {
       "description": "The go-to 64x texture pack for Minecraft. By HARYA_ and many others.",
@@ -31,5 +31,10 @@
         1
       ]
     }
-  ]
-}
+  ], 
+  "capabilities": [
+    "pbr"
+   ]
+ }
+
+
