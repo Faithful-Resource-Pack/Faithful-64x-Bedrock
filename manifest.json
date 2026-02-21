@@ -3,8 +3,9 @@
   "header": {
     "description": "The go-to 64x texture pack for Minecraft. By HARYA_ and many others.",
     "min_engine_version": [1, 26, 10],
+    "version": [13, 0, 0],
     "name": "Faithful 64x - December 2025 Release",
-    "uuid": "f0f16dbc-7242-43ad-a4fe-321d37d61a7b"
+    "uuid": "341973ae-eead-4a76-9690-5fc533e965c5"
   },
   "metadata": {
       "authors": [ "Vattic & Faithful Team" ],
@@ -15,7 +16,7 @@
     {
       "description": "The go-to 64x texture pack for Minecraft. By HARYA_ and many others.",
       "type": "resources",
-      "uuid": "a44ca3ac-5934-4ffb-aeca-1aec4ed13cbd",
+      "uuid": "49e7c8cd-2765-47d3-95cd-1e04debe3134",
       "version": [
         0,
         0,
