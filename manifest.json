@@ -2,10 +2,10 @@
   "format_version": 2,
   "header": {
     "description": "The go-to 64x texture pack for Minecraft. By HARYA_ and many others.",
-    "min_engine_version": [1, 26, 20],
+    "min_engine_version": [1, 26, 30],
     "version": [14, 0, 0],
-    "name": "Faithful 64x - Release 13",
-    "uuid": "c939fa51-2d1d-4bc9-b6cd-33fbb356c476"
+    "name": "Faithful 64x - Release 14",
+    "uuid": "2f659030-b426-4f83-b7d1-eb26969c4ebe"
   },
   "metadata": {
       "authors": [ "Vattic & Faithful Team" ],
@@ -16,7 +16,7 @@
     {
       "description": "The go-to 64x texture pack for Minecraft. By HARYA_ and many others.",
       "type": "resources",
-      "uuid": "0d8f4b95-c2a0-48f5-960d-56a102103629",
+      "uuid": "f0cefca0-d475-41bf-a597-af324b5485f2",
       "version": [
         0,
         0,
