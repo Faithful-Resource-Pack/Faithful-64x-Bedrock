@@ -2,10 +2,10 @@
   "format_version": 2,
   "header": {
     "description": "The go-to 64x texture pack for Minecraft. By HARYA_ and many others.",
-    "min_engine_version": [1, 26, 40],
+    "min_engine_version": [1, 26, 60],
     "version": [15, 0, 0],
     "name": "Faithful 64x - Release 15",
-    "uuid": "3cc91f45-1a37-4054-b6ef-7e9f2742d7e6"
+    "uuid": "0bb2546f-2a1d-4828-b7d7-2b5cc1da3ce3"
   },
   "metadata": {
       "authors": [ "Vattic & Faithful Team" ],
@@ -16,26 +16,8 @@
     {
       "description": "The go-to 64x texture pack for Minecraft. By HARYA_ and many others.",
       "type": "resources",
-      "uuid": "2f5929a1-8aee-4ad8-a55b-4911ec42e602",
+      "uuid": "7c947b02-1b30-409c-9115-d00f9fcad41e",
       "version": [0, 0, 1]
-    }
-  ],
-  "settings": [
-    {
-      "type": "label",
-      "text": "With the recent release of the 1.26.60.21 preview, Minecraft Bedrock Edition has switched to a new font format. We recommend using the Font Format After 26.5X setting."
-    }
-  ],
-  "subpacks": [
-    {
-      "folder_name": "font_26_60",
-      "name": "Font Format After 26.5X",
-      "memory_tier": 1
-    },
-    {
-      "folder_name": "font_26_50",
-      "name": "Font Format Before 26.6X",
-      "memory_tier": 1
     }
   ],
   "capabilities": ["pbr"]
